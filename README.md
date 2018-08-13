@@ -6,6 +6,7 @@ Apple Push Notification Service Provider(Binary, Http2 - certificate or AuthToke
 
 # Binary Provider API
 
+- Protocol is TCP Base
 - Send Notification by Java Socket and Netty Framework
 - Connection is TLS Protocol
 - If Send Request is Sucess, Response is no receive.
