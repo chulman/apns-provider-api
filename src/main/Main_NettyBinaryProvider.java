@@ -22,7 +22,8 @@ public class Main_NettyBinaryProvider {
 		NettyBinaryProvider provider = new NettyBinaryProvider();
 
 		try {
-			provider.connect(certPath, certName, password);
+			provider.setConfig(certPath, certName, password);
+			provider.connect();
 			provider.send(message, deviceToken);
 
 		/**

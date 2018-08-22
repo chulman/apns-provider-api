@@ -24,15 +24,16 @@ public class NettyBinaryProvider {
 
 	private ChannelFuture cf;
 	private EventLoopGroup eventLoopGroup;
+	private Bootstrap bootstrap;
 	
 	private int expireDate = 4;
 	private int priority = 10;
 	private int notificationID = 5;
-
-	public void connect(String certPath, String certName, String password) throws InterruptedException {
+	
+	public void setConfig(String certPath, String certName, String password) throws InterruptedException {
 
 		eventLoopGroup = new NioEventLoopGroup();
-		Bootstrap bootstrap = new Bootstrap();
+		bootstrap = new Bootstrap();
 
 		bootstrap.group(eventLoopGroup).channel(NioSocketChannel.class)
 		.option(ChannelOption.SO_KEEPALIVE, true)
@@ -45,10 +46,14 @@ public class NettyBinaryProvider {
 			}
 		});
 
+
+	}
+	
+	public void connect() throws InterruptedException {
 		cf = bootstrap.connect(BinaryUtils.SANDBOX_HOST, BinaryUtils.PORT).sync();
-		
+
 		System.out.println("connect:" + cf.channel().isOpen());
-//		cf.channel().closeFuture().sync();
+		// cf.channel().closeFuture().sync();
 	}
 	
 	public void send(String message, String deviceToken) throws IOException {

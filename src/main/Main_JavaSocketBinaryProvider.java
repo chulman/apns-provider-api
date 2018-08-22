@@ -18,7 +18,7 @@ public class Main_JavaSocketBinaryProvider {
 		String certName = "swift-certificate.p12";
 		
 		/** input your Certificate Password */
-		String password = "";
+		String password = "tobe0701";
 		
 		System.out.println(certPath);
 		
@@ -31,7 +31,8 @@ public class Main_JavaSocketBinaryProvider {
 		Feedback feedback = new Feedback();
 		
 		try {
-			provider.connect(certPath, certName, password);
+			provider.setConfig(certPath, certName, password);
+			provider.connect();
 			provider.send(message, deviceToken);
 			String response  = provider.receive();
 			System.err.println(response);

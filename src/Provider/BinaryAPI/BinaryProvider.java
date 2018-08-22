@@ -37,7 +37,7 @@ public class BinaryProvider {
 	private int priority = 10;
 	private int notificationID = 5;
 	
-	public void connect(String certPath, String certName, String password) throws NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException, UnrecoverableKeyException, KeyStoreException, KeyManagementException {
+	public void setConfig(String certPath, String certName, String password) throws NoSuchAlgorithmException, CertificateException, FileNotFoundException, IOException, UnrecoverableKeyException, KeyStoreException, KeyManagementException {
 
 		KeyStore ks = KeyStore.getInstance("PKCS12");
 		ks.load(new FileInputStream(certPath + certName), password.toCharArray());
@@ -54,9 +54,10 @@ public class BinaryProvider {
 
 		sc.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 		SSLSocketFactory ssf = sc.getSocketFactory();
-
-		
 		sSock = (SSLSocket) ssf.createSocket(BinaryUtils.SANDBOX_HOST, BinaryUtils.PORT);
+	}
+	
+	public void connect() throws IOException {
 
 		String[] cipherSuites = sSock.getSupportedCipherSuites();
 		sSock.setEnabledCipherSuites(cipherSuites);
@@ -64,7 +65,6 @@ public class BinaryProvider {
 		sSock.startHandshake();
 
 		System.out.println("connect:" + sSock.isConnected());
-		
 	}
 	
 
