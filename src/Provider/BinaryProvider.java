@@ -1,4 +1,4 @@
-package Provider.BinaryAPI;
+package Provider;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.SocketTimeoutException;
-import java.nio.ByteBuffer;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -21,6 +20,7 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
+import Provider.BinaryAPI.Frame;
 import Utils.BinaryUtils;
 import Utils.ConverterUtils;
 import Utils.JsonUtils;
@@ -55,15 +55,15 @@ public class BinaryProvider {
 		sc.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 		SSLSocketFactory ssf = sc.getSocketFactory();
 		sSock = (SSLSocket) ssf.createSocket(BinaryUtils.SANDBOX_HOST, BinaryUtils.PORT);
-
-		
 	}
 	
 	public void connect() throws IOException {
+
 		String[] cipherSuites = sSock.getSupportedCipherSuites();
 		sSock.setEnabledCipherSuites(cipherSuites);
 
 		sSock.startHandshake();
+
 		System.out.println("connect:" + sSock.isConnected());
 	}
 	

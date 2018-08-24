@@ -1,9 +1,10 @@
 package main;
 
 import java.io.IOException;
-import Provider.BinaryAPI.Async.NettyBinaryProvider;
 
-public class Main_NettyBinaryProvider {
+import Provider.AsyncBinaryProvider;
+
+public class Main_AsyncBinaryProvider {
 	public static void main(String[] args) {
 
 		String certPath = System.getProperty("user.dir") + "\\lib\\";
@@ -19,7 +20,7 @@ public class Main_NettyBinaryProvider {
 		/** input your device Token */
 		String deviceToken = "";
 		
-		NettyBinaryProvider provider = new NettyBinaryProvider();
+		AsyncBinaryProvider provider = new AsyncBinaryProvider();
 
 		try {
 			provider.setConfig(certPath, certName, password);

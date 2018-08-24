@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
-import Provider.BinaryAPI.BinaryProvider;
+import Provider.BinaryProvider;
 import Provider.BinaryAPI.FeedbackService.Feedback;
 
 public class Main_JavaSocketBinaryProvider {
