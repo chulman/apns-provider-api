@@ -27,3 +27,8 @@ hs_err_pid*
 #eclipse
 org.eclipse.jdt.core.prefs
 bin
+
+
+# intellij
+.idea
+.build
