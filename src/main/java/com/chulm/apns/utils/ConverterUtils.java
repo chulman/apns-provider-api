@@ -1,5 +1,7 @@
-package Utils;
+package com.chulm.apns.utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class ConverterUtils {
@@ -32,5 +34,35 @@ public class ConverterUtils {
 			sb.append(hexNumber.substring(hexNumber.length() - 2));
 		}
 		return sb.toString();
+	}
+
+	public static byte[] fromHexaString(String token) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+		int offset = 0;
+		while (offset < token.length()) {
+			String str = token.substring(offset, offset + 2);
+
+			int n = Integer.parseInt(str, 16);
+			baos.write(n);
+
+			offset += 2;
+		}
+		try {
+			baos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return baos.toByteArray();
+	}
+
+	public static String toHexaString(byte[] token) {
+		String tokenString = "";
+
+		for (int i = 0; i < 32; i++) {
+			int octet = (0x000000FF & ((int) token[i]));
+			tokenString = tokenString.concat(String.format("%02x", octet));
+		}
+		return tokenString;
 	}
 }

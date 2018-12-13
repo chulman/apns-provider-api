@@ -1,4 +1,4 @@
-package Provider.Http2API;
+package com.chulm.apns.connector.http2;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
@@ -12,15 +12,18 @@ import io.netty.handler.codec.http2.InboundHttp2ToHttpAdapterBuilder;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslHandler;
 
-public class Http2ClientInit extends ChannelInitializer<SocketChannel> {
+public class Http2ClientInitializer extends ChannelInitializer<SocketChannel> {
 
 	SslContext sslctx;
 	int max_length = Integer.MAX_VALUE;
-	private HttpToHttp2ConnectionHandler httpToHttp2ConnectionHandlerBuilder;
-	private httpResponseHandler responseHandler;
-	EventLoopGroup eventLoopGroup;
 
-	public Http2ClientInit(SslContext sslctx, EventLoopGroup eventLoopGroup) {
+	private HttpToHttp2ConnectionHandler httpToHttp2ConnectionHandlerBuilder;
+	private HttpResponseHandler responseHandler;
+
+	private Http2ResponseListener http2ResponseListener;
+	private EventLoopGroup eventLoopGroup;
+
+	public Http2ClientInitializer(SslContext sslctx, EventLoopGroup eventLoopGroup) {
 		super();
 		this.sslctx = sslctx;
 		this.eventLoopGroup = eventLoopGroup;
@@ -39,7 +42,7 @@ public class Http2ClientInit extends ChannelInitializer<SocketChannel> {
 						.build()))
 				.connection(http2Connection)
 				.build();
-		responseHandler = new httpResponseHandler(eventLoopGroup);
+		responseHandler = new HttpResponseHandler(eventLoopGroup);
 
 		ChannelPipeline pipeline = socketChannel.pipeline();
 
@@ -51,7 +54,16 @@ public class Http2ClientInit extends ChannelInitializer<SocketChannel> {
 
 	}
 
-	httpResponseHandler responseHandler() {
+	HttpResponseHandler responseHandler() {
 		return responseHandler;
+	}
+
+	public Http2ResponseListener getHttp2ResponseListener() {
+		return http2ResponseListener;
+	}
+
+	public void setHttp2ResponseListener(Http2ResponseListener http2ResponseListener) {
+		this.http2ResponseListener = http2ResponseListener;
+		responseHandler.setHttp2ResponseListener(http2ResponseListener);
 	}
 }
