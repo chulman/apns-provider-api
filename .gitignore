@@ -42,4 +42,10 @@ hs_err_pid*
 
 #intellij
 .idea
+.iml
 out
+lib/
+target/classes/META-INF/
+target/classes/log4j.properties
+target/generated-sources/
+target/generated-test-sources/
