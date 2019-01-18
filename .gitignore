@@ -41,8 +41,8 @@ hs_err_pid*
 
 
 #intellij
+*.iml
 .idea
-.iml
 out
 lib/
 target/classes/META-INF/
