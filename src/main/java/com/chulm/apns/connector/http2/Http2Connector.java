@@ -32,11 +32,11 @@ public class Http2Connector extends ApnsConnector {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    private Http2ClientInitializer http2ClientInitializer = null;
+    private Http2ClientInitializer http2ClientInitializer;
 
     private Channel channel = null;
-    private EventLoopGroup eventLoopGroup = null;
-    private Bootstrap bootstrap = null;
+    private EventLoopGroup eventLoopGroup;
+    private Bootstrap bootstrap;
 
     private  Http2ResponseListener http2ResponseListener;
 
@@ -85,6 +85,7 @@ public class Http2Connector extends ApnsConnector {
         FullHttpRequest request = null;
 
         String paylaod = payload.parseToJson();
+        log.info("payload ={}",paylaod);
 
         HttpHeaders httpHeaders = new DefaultHttpHeaders();
 

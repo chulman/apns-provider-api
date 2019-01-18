@@ -1,6 +1,11 @@
 package com.chulm.apns.format.payload;
 
-import org.json.JSONObject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Payload {
 
@@ -20,27 +25,27 @@ public class Payload {
     private String launch_image;
 
 
-    private JSONObject data = null;
-    private JSONObject aps = null;
-    private JSONObject alert = null;
+    private final Map<String, Object> aps = new HashMap<String, Object>();
+    private final Map<String, Object> alert = new HashMap<String, Object>();
+    private final Map<String, Object> payload = new HashMap<String, Object>();
 
-    public Payload() {
-        data = new JSONObject();
-        aps = new JSONObject();
-        alert = new JSONObject();
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    }
-
-    public void append(String key, Object value){
-        data.append(key,value);
+    public void put(String key, Object value) {
+        payload.put(key, value);
     }
 
 
     public String parseToJson() {
-        aps.put(Key.ALERT,alert.toString());
-        data.put(Key.APS,aps.toString());
+        try {
+            aps.put(Key.ALERT,alert);
+            payload.put(Key.APS,aps);
+            return mapper.writeValueAsString(payload);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
-        return data.toString();
+        return null;
     }
 
 
@@ -50,7 +55,7 @@ public class Payload {
 
     public void setTitle(String title) {
         this.title = title;
-        alert.put(Key.ALERT_TITLE,getTitle());
+        alert.put(Key.ALERT_TITLE, getTitle());
     }
 
     public String getBody() {
@@ -59,7 +64,7 @@ public class Payload {
 
     public void setBody(String body) {
         this.body = body;
-        alert.put(Key.ALERT_BODY,getTitle());
+        alert.put(Key.ALERT_BODY, getBody());
     }
 
     public int getBadge() {
@@ -77,7 +82,7 @@ public class Payload {
 
     public void setSound(String sound) {
         this.sound = sound;
-        aps.put(Key.SOUND,sound);
+        aps.put(Key.SOUND, sound);
     }
 
     public String getCategory() {
@@ -86,7 +91,7 @@ public class Payload {
 
     public void setCategory(String category) {
         this.category = category;
-        aps.put(Key.CATEGORY,category);
+        aps.put(Key.CATEGORY, category);
     }
 
     public int getContent_available() {
@@ -95,7 +100,7 @@ public class Payload {
 
     public void setContent_available(int content_available) {
         this.content_available = content_available;
-        aps.put(Key.CONTENT_AVAILABLE,content_available);
+        aps.put(Key.CONTENT_AVAILABLE, content_available);
     }
 
     public String getAction_loc_key() {
@@ -104,7 +109,7 @@ public class Payload {
 
     public void setAction_loc_key(String action_loc_key) {
         this.action_loc_key = action_loc_key;
-        alert.put(Key.ALERT_ACTION_LOC_KEY,action_loc_key);
+        alert.put(Key.ALERT_ACTION_LOC_KEY, action_loc_key);
     }
 
     public String getLoc_key() {
@@ -131,39 +136,22 @@ public class Payload {
 
     public void setLaunch_image(String launch_image) {
         this.launch_image = launch_image;
-        aps.put(Key.ALERT_LAUNCH_IMAGE,launch_image);
+        aps.put(Key.ALERT_LAUNCH_IMAGE, launch_image);
     }
 
-    public JSONObject getData() {
-        return data;
-    }
 
-    public void setData(JSONObject data) {
-        this.data = data;
-    }
-
-    public JSONObject getAps() {
+    public Map<String, Object> getAps() {
         return aps;
     }
 
-    public void setAps(JSONObject aps) {
-        this.aps = aps;
-    }
-
-    public JSONObject getAlert() {
+    public Map<String, Object> getAlert() {
         return alert;
-    }
-
-    public void setAlert(JSONObject alert) {
-        this.alert = alert;
     }
 
     @Override
     public String toString() {
         return "Payload{" +
-                "data=" + data +
-                ", aps=" + aps +
-                ", alert=" + alert +
+                "payload=" + payload +
                 '}';
     }
 }

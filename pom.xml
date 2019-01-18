@@ -79,13 +79,6 @@
             <version>2.9.8</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
-        </dependency>
-
 
         <!-- junit -->
         <dependency>
@@ -103,12 +96,5 @@
             <email>chlcjfals0122@gmail.com</email>
         </developer>
     </developers>
-
-    <licenses>
-        <license>
-            <name>The BSD 3-Clause License</name>
-            <url>https://opensource.org/licenses/BSD-3-Clause</url>
-        </license>
-    </licenses>
 
 </project>

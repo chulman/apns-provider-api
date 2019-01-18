@@ -23,7 +23,8 @@ public class Frame {
     private int length;
     private byte[] data;
 
-    public Frame() {}
+    public Frame() {
+    }
 
     public Frame(String deviceToken, Payload payload) {
         this.deviceToken = deviceToken;
@@ -40,11 +41,10 @@ public class Frame {
         this.deviceToken = deviceToken;
         this.payload = payload;
         this.expireDate = expireDate;
-        this.priority = priority;
         this.notificationID = notificationID;
     }
 
-    public Frame(String deviceToken, Payload payload,  int notificationID, int expireDate, int priority) {
+    public Frame(String deviceToken, Payload payload, int notificationID, int expireDate, int priority) {
         this.deviceToken = deviceToken;
         this.payload = payload;
         this.expireDate = expireDate;
