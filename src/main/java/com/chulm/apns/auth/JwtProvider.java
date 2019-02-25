@@ -83,12 +83,12 @@ public class JwtProvider {
         String[] tokenArr = token.split("\\.");
        JwtHeader jwtHeader =  decoding_header(tokenArr[0]);
 
-       if(jwtHeader.getAlg() != "ES256"){
+       if(!jwtHeader.getAlg().equals("ES256")){
            verify = false;
        }
        JwtPayload jwtPayload = decding_payload(tokenArr[1]);
 
-       long cuurentTime = System.currentTimeMillis();
+       long cuurentTime = System.currentTimeMillis() / 1000;
        long createTime = jwtPayload.getIat();
 
        long day = 86400000;
@@ -119,7 +119,6 @@ public class JwtProvider {
     private JwtHeader decoding_header(String base64Header) throws TokenVerifyException {
         byte[]  bytes = Base64.getDecoder().decode(base64Header.getBytes(StandardCharsets.UTF_8));
         String header = new String(bytes,StandardCharsets.UTF_8);
-        System.out.println(header);
         JwtHeader jwtHeader = null;
         try {
             jwtHeader = objectMapper.readValue(header,JwtHeader.class);

@@ -140,7 +140,7 @@ public class ApnsProvider {
             throw new AuthenticationException("Not Found Apns Access Token. Make CreateToken()");
         }
 
-        if(validate(getAccessToken())){
+        if(!validate(getAccessToken())){
             throw new AuthenticationException("Apns Access Token invalidate. Make RefeshToken()");
         }
 
@@ -166,7 +166,7 @@ public class ApnsProvider {
             throw new AuthenticationException("Not Found Apns Access Token. Make CreateToken()");
         }
 
-        if(validate(getAccessToken())){
+        if(!validate(getAccessToken())){
             throw new AuthenticationException("Apns Access Token invalidate. Make RefeshToken()");
         }
 
@@ -193,8 +193,7 @@ public class ApnsProvider {
         if(getAccessToken() == null){
             throw new AuthenticationException("Not Found Apns Access Token. Make CreateToken()");
         }
-
-        if(validate(getAccessToken())){
+        if(!validate(getAccessToken())){
             throw new AuthenticationException("Apns Access Token invalidate. Make RefeshToken()");
         }
 
@@ -226,7 +225,7 @@ public class ApnsProvider {
             throw new AuthenticationException("Not Found Apns Access Token. Make CreateToken()");
         }
 
-        if(validate(getAccessToken())){
+        if(!validate(getAccessToken())){
             throw new AuthenticationException("Apns Access Token invalidate. Make RefeshToken()");
         }
 
@@ -257,7 +256,7 @@ public class ApnsProvider {
             throw new AuthenticationException("Not Found Apns Access Token. Make CreateToken()");
         }
 
-        if(validate(getAccessToken())){
+        if(!validate(getAccessToken())){
             throw new AuthenticationException("Apns Access Token invalidate. Make RefeshToken()");
         }
 
